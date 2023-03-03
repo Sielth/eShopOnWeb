@@ -11,3 +11,6 @@ Lav det evt. på jeres nye features som i er blevet enige om i gruppen at lave.
 Ekstra:
 
 Prøv at måle hastighedsforskellen ved brug af mocking ift. testdata hentet fra DB
+
+TODO:
+Tomas vil lave test over OrderService i ApplicationCore
