@@ -41,6 +41,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorShared", "src\BlazorS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PublicApiIntegrationTests", "tests\PublicApiIntegrationTests\PublicApiIntegrationTests.csproj", "{D53EF010-8F8C-4337-A059-456E19D8AE63}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{C2CFD865-4C7D-4B70-B743-C0D55FD2B6FE}"
+	ProjectSection(SolutionItems) = preProject
+		docs\opgave1.txt = docs\opgave1.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

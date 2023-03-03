@@ -1,0 +1,13 @@
+Hjemmeopgave.
+
+I jeres projekt: eshopOnWeb skal der oprettes eksempler på hvor og hvordan I vil brugt DDT. Der skal laves både Theory -> inline, Class, member og mocking.
+
+Framework til mocking er valgfrit.
+
+Der skal laves mindst 3 eksempler på DDT og mocking i projektet
+
+Lav det evt. på jeres nye features som i er blevet enige om i gruppen at lave.
+
+Ekstra:
+
+Prøv at måle hastighedsforskellen ved brug af mocking ift. testdata hentet fra DB
