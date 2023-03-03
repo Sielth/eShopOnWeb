@@ -13,19 +13,15 @@ using Xunit;
 namespace Microsoft.eShopWeb.UnitTests.ApplicationCore.Services.OrderServiceTests;
 public class CreateOrder
 {
-    private readonly Mock<IRepository<Order>> _mockOrderRepository;
-    private readonly Mock<IUriComposer> _mockUriComposer;
-    private readonly Mock<IRepository<Basket>> _mockBasketRepository;
-    private readonly Mock<IRepository<CatalogItem>> _mockCatalogItem;
-    private readonly IOrderService _orderService;
+    private readonly Mock<IRepository<Order>> _mockOrderRepository = new();
+    private readonly Mock<IUriComposer> _mockUriComposer = new();
+    private readonly Mock<IRepository<Basket>> _mockBasketRepository = new();
+    private readonly Mock<IRepository<CatalogItem>> _mockCatalogItem = new();
+
+    private readonly OrderService _orderService;
 
     public CreateOrder()
     {
-        _mockOrderRepository = new Mock<IRepository<Order>>();
-        _mockUriComposer = new Mock<IUriComposer>();
-        _mockBasketRepository = new Mock<IRepository<Basket>>();
-        _mockCatalogItem = new Mock<IRepository<CatalogItem>>();
-
         _orderService = new OrderService(_mockBasketRepository.Object,
             _mockCatalogItem.Object,
             _mockOrderRepository.Object,
@@ -34,7 +30,11 @@ public class CreateOrder
         // Create a non-null basket object with some dummy data
         var basket = new Basket("buyer1");
         basket.AddItem(1, 10.0m, 2);
-        basket.AddItem(2, 20.0m, 1);
+        basket.AddItem(1, 20.0m, 1);
+
+        _mockBasketRepository.Setup(repo => repo
+                .FirstOrDefaultAsync(It.IsAny<BasketWithItemsSpecification>(), CancellationToken.None))
+            .ReturnsAsync(basket);
 
         // Create a list of catalogItems objects with some dummy data
         var catalogItems = new List<CatalogItem>
@@ -43,8 +43,14 @@ public class CreateOrder
             new CatalogItem(0, 2, "item2", "name2", 20.0m, "picture2")
         };
 
-        _mockBasketRepository.Setup(repo => repo.FirstOrDefaultAsync(It.IsAny<BasketWithItemsSpecification>(), CancellationToken.None))
-            .ReturnsAsync(basket);
+        foreach (var item in catalogItems)
+        {
+            item.GetType()?.GetProperty("Id")?.SetValue( item, 1);
+        }
+        
+        _mockUriComposer.Setup(x => x
+            .ComposePicUri(It.IsAny<string>())).Returns("pictureUri");
+        
         _mockCatalogItem.Setup(repo => repo.ListAsync(It.IsAny<CatalogItemsSpecification>(), CancellationToken.None))
             .ReturnsAsync(catalogItems);
     }
@@ -72,5 +78,4 @@ public class CreateOrder
         // Verify that AddAsync method was called once with any order object as argument
         _mockOrderRepository.Verify(repo => repo.AddAsync(It.IsAny<Order>(), CancellationToken.None), Times.Once);
     }
-
 }
