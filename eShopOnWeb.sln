@@ -43,6 +43,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PublicApiIntegrationTests",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{C2CFD865-4C7D-4B70-B743-C0D55FD2B6FE}"
 	ProjectSection(SolutionItems) = preProject
+		Features1.txt = Features1.txt
 		docs\opgave1.txt = docs\opgave1.txt
 	EndProjectSection
 EndProject

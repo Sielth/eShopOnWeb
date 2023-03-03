@@ -1,0 +1,2 @@
+Medlemskab modul , hvor medlemder får 10 procent rabat på deres første køb .
+test om de har fået det rigtig beløb trukket .
