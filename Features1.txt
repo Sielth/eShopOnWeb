@@ -1,2 +1,10 @@
-Medlemskab modul , hvor medlemder får 10 procent rabat på deres første køb .
-test om de har fået det rigtig beløb trukket .
+TilfÃ¸j et knap der viser info om varen
+TilfÃ¸j et felt der viser hvor mange varer er der 
+Vis hvor kan man kÃ¸be varen hen i landet 
+TilfÃ¸j kontakt oplysning ( evt. tlf til kundeservice ) i bunden af siden 
+
+Medlemskab modul , hvor medlemder fï¿½r 10 procent rabat pï¿½ deres fï¿½rste kï¿½b .
+test om de har fï¿½et det rigtig belï¿½b trukket .
+
+TilfÃ¸j fri fragt hvis belÃ¸b > 300kr 
+
