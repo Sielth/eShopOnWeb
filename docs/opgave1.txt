@@ -12,5 +12,11 @@ Ekstra:
 
 Prøv at måle hastighedsforskellen ved brug af mocking ift. testdata hentet fra DB
 
-TODO:
-Tomas vil lave test over OrderService i ApplicationCore
+---
+
+Tests done:
+
+1. tests/UnitTests/ApplicationCore/Services/OrderServiceTests/CreateOrder.cs => MemberData + Mocking
+2. tests/UnitTests/Web/Services/BasketViewModelServiceTests.cs => MemberData + InlineData + Mocking
+3. tests/UnitTests/MediatorHandlers/OrdersTests/GetOrderDetails.cs => ClassData + Mocking
+4. tests/UnitTests/Web/IdentityTest/LoginMockTest.cs => Vi brugte virkelig lang tid til at teste login funktionen, dog uden held, da SignInManager har ikke et interface, derfor kan det ikke mockes.

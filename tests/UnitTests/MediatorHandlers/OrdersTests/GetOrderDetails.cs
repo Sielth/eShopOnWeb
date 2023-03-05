@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Ardalis.Specification;
@@ -14,6 +15,13 @@ namespace Microsoft.eShopWeb.UnitTests.MediatorHandlers.OrdersTests;
 public class GetOrderDetails
 {
     private readonly Mock<IReadRepository<Order>> _mockOrderRepository;
+    
+    public static IEnumerable<object[]> Data => new List<object[]>
+    {
+        new object[] { new eShopWeb.Web.Features.OrderDetails.GetOrderDetails("Username1", 1), 300 },
+        new object[] { new eShopWeb.Web.Features.OrderDetails.GetOrderDetails("Username2", 2), 300 },
+        new object[] { new eShopWeb.Web.Features.OrderDetails.GetOrderDetails("Username3", 3), 300 },
+    };
 
     public GetOrderDetails()
     {
@@ -58,7 +66,7 @@ public class GetOrderDetails
     }
 
     [Theory]
-    [MemberData(nameof(GetOrderDetailsData.Data), MemberType=typeof(GetOrderDetailsData))]
+    [ClassData(typeof(GetOrderDetailsData))]
     public async Task ReturnsTotalPriceOfMyOrder(eShopWeb.Web.Features.OrderDetails.GetOrderDetails request, decimal expected)
     {
         var handler = new GetOrderDetailsHandler(_mockOrderRepository.Object);
@@ -69,12 +77,14 @@ public class GetOrderDetails
     }
 }
 
-public class GetOrderDetailsData
+public class GetOrderDetailsData  : IEnumerable<object[]>
 {
-    public static IEnumerable<object[]> Data => new List<object[]>
+    public IEnumerator<object[]> GetEnumerator()
     {
-        new object[] { new eShopWeb.Web.Features.OrderDetails.GetOrderDetails("Username1", 1), 300 },
-        new object[] { new eShopWeb.Web.Features.OrderDetails.GetOrderDetails("Username2", 2), 300 },
-        new object[] { new eShopWeb.Web.Features.OrderDetails.GetOrderDetails("Username3", 3), 300 },
-    };
+        yield return new object[] { new eShopWeb.Web.Features.OrderDetails.GetOrderDetails("Username1", 1), 300 };
+        yield return new object[] { new eShopWeb.Web.Features.OrderDetails.GetOrderDetails("Username2", 2), 300 };
+        yield return new object[] { new eShopWeb.Web.Features.OrderDetails.GetOrderDetails("Username3", 3), 300 };
+    }
+
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 }

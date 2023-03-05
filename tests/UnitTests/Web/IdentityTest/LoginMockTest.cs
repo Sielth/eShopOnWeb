@@ -18,7 +18,7 @@ public class LoginMockTest
     // private readonly Mock<FakeSignInManager> _mocksignInmanager;
     private readonly SignInManager<ApplicationUser> _signInManager = Substitute.For<SignInManager<ApplicationUser>>();
     private readonly ILogger<LoginModel> _logger = Substitute.For<ILogger<LoginModel>>();
-    private readonly IBasketService _basketService = Substitute.For<BasketService>();
+    private readonly IBasketService _basketService = Substitute.For<IBasketService>();
 
     private readonly LoginModel _sut;
     
