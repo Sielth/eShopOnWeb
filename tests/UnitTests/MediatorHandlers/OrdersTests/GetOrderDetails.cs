@@ -16,13 +16,6 @@ public class GetOrderDetails
 {
     private readonly Mock<IReadRepository<Order>> _mockOrderRepository;
     
-    public static IEnumerable<object[]> Data => new List<object[]>
-    {
-        new object[] { new eShopWeb.Web.Features.OrderDetails.GetOrderDetails("Username1", 1), 300 },
-        new object[] { new eShopWeb.Web.Features.OrderDetails.GetOrderDetails("Username2", 2), 300 },
-        new object[] { new eShopWeb.Web.Features.OrderDetails.GetOrderDetails("Username3", 3), 300 },
-    };
-
     public GetOrderDetails()
     {
         var item = new OrderItem(new CatalogItemOrdered(1, "ProductName", "URI"), 10.00m, 10);
