@@ -78,9 +78,9 @@ public class BasketViewModelTests
         };
         
         // Act
-        _basketViewModel.Total();
+        var delivery = _basketViewModel.CalculateDelivery();
 
         // Assert
-        Assert.Equal(expected, _basketViewModel.Delivery);
+        Assert.Equal(expected, _basketViewModel.CalculateDelivery());
     }
 }
