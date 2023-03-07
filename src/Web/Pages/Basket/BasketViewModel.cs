@@ -11,7 +11,7 @@ public class BasketViewModel
     {
         var total = Math.Round(Items.Sum(x => x.UnitPrice * x.Quantity), 2);
 
-        if (total > Delivery) Delivery = 0;
+        if (total >= Delivery) Delivery = 0;
         
         return total += Delivery;
     }
