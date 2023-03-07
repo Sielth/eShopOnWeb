@@ -3,13 +3,14 @@ Tilføj et felt der viser hvor mange varer er der
 Vis hvor kan man købe varen hen i landet 
 Tilføj kontakt oplysning ( evt. tlf til kundeservice ) i bunden af siden 
 
-Medlemskab modul , hvor medlemder f�r 10 procent rabat p� deres f�rste k�b .
-test om de har f�et det rigtig bel�b trukket .
+Medlemskab modul , hvor medlemder får 10 procent rabat på deres første køb .
+test om de har fået det rigtig beløb trukket .
 
 Tilføj fri fragt hvis beløb > 300kr 
 
 Use Cases :1.Put your items in favorite bakset 
            2.Show how many items are still available on webshoppen  
            3.Show items details 
-           4.Add 10% sale on items price for Webshop members
-           5.Add free delivery option when the totalprice exceeds 300kr.
+           4.Operate member 
+           5.Add 10% sale on items price for Webshop members
+           6.Add free delivery option when the totalprice exceeds 300kr.
