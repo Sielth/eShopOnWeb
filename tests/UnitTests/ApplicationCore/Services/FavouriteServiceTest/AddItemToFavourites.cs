@@ -6,7 +6,6 @@ using Microsoft.eShopWeb.ApplicationCore.Specifications;
 using Moq;
 using Xunit;
 
-
 namespace Microsoft.eShopWeb.UnitTests.ApplicationCore.Services.FavouriteServiceTest;
 public class AddItemToFavourites
 {
