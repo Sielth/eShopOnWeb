@@ -12,33 +12,28 @@ internal class Favourite : BaseEntity, IAggregateRoot
 {
     public string BuyerId { get; private set; }
 
-    private readonly List<Favourite> _favouriteitems = new List<Favourite>();
-    public IReadOnlyCollection<Favourite> Items => _favouriteitems.AsReadOnly();
+    private readonly List<FavouriteItem> _favouriteitems = new List<FavouriteItem>();
+    public IReadOnlyCollection<FavouriteItem> Items => _favouriteitems.AsReadOnly();
     public int Quantity { get; private set; }
     public int CatalogItemId { get; private set; }
-    public int TotalItems => _favouriteitems.Sum(i => i.Quantity);
+  
     public int CatalogTypeID { get; private set; }
     public Favourite(string buyerId)
     {
       
         BuyerId = buyerId;
     }
-    public void AddItem(int CatalogTypeID, int catalogbrandId, string description , string name, decimal price)
+    public void AddItem(int catalogItemID, decimal price)
     {
-        if (!Items.Any(i => i.CatalogTypeID == catalogTypeId))
+        if (!Items.Any(i => i.CatalogItemId == catalogItemID))
         {
-            _favouriteitems.Add(new CatalogItem(CatalogTypeID, catalogbrandId, description,name,price));
+            _favouriteitems.Add(new FavouriteItem(CatalogTypeID, price));
             return;
         }
-        var existingItem = Items.First(i => i.CatalogItemId == catalogItemId);
-        
-        existingItem.AddQuantity(quantity);
+        var existingItem = Items.First(i => i.CatalogItemId == CatalogTypeID);
+      
     }
-    public void RemoveEmptyItems()
-    {
-        _favouriteitems.RemoveAll(i => i.Quantity == 0);
-    }
-
+   
     public void SetNewBuyerId(string buyerId)
     {
         BuyerId = buyerId;
