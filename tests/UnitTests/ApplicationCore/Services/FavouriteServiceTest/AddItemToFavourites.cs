@@ -13,10 +13,9 @@ public class AddItemToFavourites
     private readonly Mock<IRepository<Favourite>> _mockFavouriteRepo = new();
 
     [Fact]
-    public async Task AddToFavouriteTest()
+    public async Task DoesFavouriteServiceFetchAnUsersFavourites()
     {
         var favourite = new Favourite(_buyerId);
-        favourite.AddItem(1, It.IsAny<decimal>());
 
         _mockFavouriteRepo.Setup(x => x.FirstOrDefaultAsync(It.IsAny<FavouriteItemsSpecification>(), default)).ReturnsAsync(favourite);
 
