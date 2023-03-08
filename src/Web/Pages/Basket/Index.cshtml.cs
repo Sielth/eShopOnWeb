@@ -13,14 +13,16 @@ public class IndexModel : PageModel
     private readonly IBasketService _basketService;
     private readonly IBasketViewModelService _basketViewModelService;
     private readonly IRepository<CatalogItem> _itemRepository;
+    private readonly ILogger<IndexModel> _logger;
 
     public IndexModel(IBasketService basketService,
         IBasketViewModelService basketViewModelService,
-        IRepository<CatalogItem> itemRepository)
+        IRepository<CatalogItem> itemRepository, ILogger<IndexModel> logger)
     {
         _basketService = basketService;
         _basketViewModelService = basketViewModelService;
         _itemRepository = itemRepository;
+        _logger = logger;
     }
 
     public BasketViewModel BasketModel { get; set; } = new BasketViewModel();
@@ -29,7 +31,7 @@ public class IndexModel : PageModel
     {
         BasketModel = await _basketViewModelService.GetOrCreateBasketForUser(GetOrSetBasketCookieAndUserName());
     }
-
+    
     public async Task<IActionResult> OnPost(CatalogItemViewModel productDetails)
     {
         if (productDetails?.Id == null)
@@ -44,6 +46,7 @@ public class IndexModel : PageModel
         }
 
         var username = GetOrSetBasketCookieAndUserName();
+
         var basket = await _basketService.AddItemToBasket(username,
             productDetails.Id, item.Price);
 
@@ -88,6 +91,7 @@ public class IndexModel : PageModel
                 }
             }
         }
+
         if (userName != null) return userName;
 
         userName = Guid.NewGuid().ToString();
