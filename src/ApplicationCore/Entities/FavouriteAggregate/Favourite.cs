@@ -8,7 +8,7 @@ using Microsoft.eShopWeb.ApplicationCore.Interfaces;
 
 namespace Microsoft.eShopWeb.ApplicationCore.Entities.FavouriteAggregate;
 
-internal class Favourite : BaseEntity, IAggregateRoot
+public class Favourite : BaseEntity, IAggregateRoot
 {
     public string BuyerId { get; private set; }
 
@@ -23,14 +23,15 @@ internal class Favourite : BaseEntity, IAggregateRoot
       
         BuyerId = buyerId;
     }
+
     public void AddItem(int catalogItemID, decimal price)
     {
-        if (!Items.Any(i => i.CatalogItemId == catalogItemID))
-        {
-            _favouriteitems.Add(new FavouriteItem(CatalogTypeID, price));
-            return;
-        }
-        var existingItem = Items.First(i => i.CatalogItemId == CatalogTypeID);
+        //if (!Items.Any(i => i.CatalogItemId == catalogItemID))
+        //{
+        //    _favouriteitems.Add(new FavouriteItem(CatalogTypeID, price));
+        //    return;
+        //}
+        //var existingItem = Items.First(i => i.CatalogItemId == CatalogTypeID);
       
     }
    

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Microsoft.eShopWeb.ApplicationCore.Entities.FavouriteAggregate;
-internal class FavouriteItem :BaseEntity
+public class FavouriteItem :BaseEntity
 {
 
     public decimal UnitPrice { get; private set; }
