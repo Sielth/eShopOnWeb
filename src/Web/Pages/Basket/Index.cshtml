@@ -51,12 +51,14 @@
                         <section class="esh-basket-title col-xs-10"></section>
                         <section class="esh-basket-title col-xs-2">Total</section>
                     </article>
-
                     <article class="esh-basket-items row">
                         <section class="esh-basket-item col-xs-10"></section>
-                        <section class="esh-basket-item esh-basket-item--mark col-xs-2">$ @Model.BasketModel.CalculateItemsTotalPrice().ToString("N2")</section>
+                        <section class="esh-basket-item esh-basket-item--mark col-xs-2">Delivery Fee: $ @Model.BasketModel.CalculateDelivery().ToString("N2")</section>
                     </article>
-
+                    <article class="esh-basket-items row">
+                        <section class="esh-basket-item col-xs-10"></section>
+                        <section class="esh-basket-item esh-basket-item--mark col-xs-2">Total: $ @Model.BasketModel.CalculateTotal().ToString("N2")</section>
+                    </article>
                     <article class="esh-basket-items row">
                         <section class="esh-basket-item col-xs-7"></section>
                     </article>
