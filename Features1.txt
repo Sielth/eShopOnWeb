@@ -19,12 +19,13 @@ Use Cases :1.Put your items in favorite bakset
            
            
 Backlog: 
-- FavouriteItemViewModel - alessia
-- FavouriteViewModel - alessia
-- Index - alessia
+- Fix basket 
+- FavouriteItemViewModel - alessia Missing properties
+- FavouriteViewModel - alessia Done
+- Index - alessia added OnPOst method
+- Add button that redirects to index on post (favourites)
 - FavouriteQueryService - tomas
 - FavouriteViewModelService - tomas
 - FavouriteViewComponent Hanaa 
 - FavouriteComponentViewModel Hanaa 
 - front-end Hanaa
-
