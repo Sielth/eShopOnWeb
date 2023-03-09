@@ -12,7 +12,7 @@ Use Cases :1.Put your items in favorite bakset
            2.Show how many items are still available on webshoppen  
            3.Show items details 
            4.Operate membership  
-           5.Add 10% sale on items price for Webshop members ,or Add 10% sale on first purchase
+           5.Add 10% sale on items price for Webshop members , or Add 10% sale on first purchase
            6.Add free delivery option when the totalprice exceeds 300kr.
            7.Choose the size of the item 
            8.Choose Shipping Company (PostNord, GLS, homeadresse)
