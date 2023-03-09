@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.eShopWeb.ApplicationCore.Entities;
 using Microsoft.eShopWeb.ApplicationCore.Interfaces;
 using Microsoft.eShopWeb.Web.Interfaces;
+using Microsoft.eShopWeb.Web.ViewModels;
 
 namespace Microsoft.eShopWeb.Web.Pages.Favourites;
 
@@ -18,8 +20,8 @@ public class IndexModel : PageModel
         _itemRepository = itemRepository;
     }
     
-    public void OnGet()
+    public async Task<IActionResult> OnPost(CatalogItemViewModel productDetails)
     {
-        
+        return null;
     }
 }

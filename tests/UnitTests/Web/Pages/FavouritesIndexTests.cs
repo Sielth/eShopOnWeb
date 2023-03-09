@@ -23,22 +23,22 @@ public class FavouritesIndexTests
     }
 
     [Fact]
-    public async Task OnPost_AddItemsToBasket_GetsCalledOnce()
+    public async Task OnPost_AddItemsFavourites_GetsCalledOnce()
     {
         var id = 1;
-        var catalogViewModel = new CatalogItemViewModel { Id = id };
+        var catalogItemViewModel = new CatalogItemViewModel { Id = id };
         var favouriteViewModel = new FavouritesViewModel();
-        var catalogItem = new CatalogItem(1,1,"desc", "name", 10m, "picture");
+        var catalogItem = new CatalogItem(1, 1, "desc", "name", 10m, "picture");
 
         _itemRepository.Setup(x => x.GetByIdAsync(It.IsAny<int>(), default))
             .ReturnsAsync(catalogItem);
-        
+
         // username might fail?
         _favouriteViewModelService.Setup(x => x.Map(It.IsAny<Favourite>(), default))
             .ReturnsAsync(favouriteViewModel);
 
+        _sut.OnPost(catalogItemViewModel);
+
         _favouriteServiceMock.Verify(service => service.AddToFavourites("username", 1, 1));
-
     }
-
 }

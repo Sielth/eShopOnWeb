@@ -14,3 +14,14 @@ Use Cases :1.Put your items in favorite bakset
            4.Operate member 
            5.Add 10% sale on items price for Webshop members
            6.Add free delivery option when the totalprice exceeds 300kr.
+           
+           
+Backlog: 
+- FavouriteItemViewModel - alessia
+- FavouriteViewModel - alessia
+- Index - alessia
+- FavouriteQueryService
+- FavouriteViewModelService
+- FavouriteViewComponent
+- FavouriteComponentViewModel
+- front-end
