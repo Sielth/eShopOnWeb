@@ -33,7 +33,7 @@ public class CreateOrder
         basket.AddItem(1, 20.0m, 1);
 
         _mockBasketRepository.Setup(repo => repo
-                .FirstOrDefaultAsync(It.IsAny<BasketWithItemsSpecification>(), CancellationToken.None))
+                .FirstOrDefaultAsync(It.IsAny<BasketWithItemsSpecification>(), default))
             .ReturnsAsync(basket);
 
         // Create a list of catalogItems objects with some dummy data
@@ -51,7 +51,7 @@ public class CreateOrder
         _mockUriComposer.Setup(x => x
             .ComposePicUri(It.IsAny<string>())).Returns("pictureUri");
         
-        _mockCatalogItem.Setup(repo => repo.ListAsync(It.IsAny<CatalogItemsSpecification>(), CancellationToken.None))
+        _mockCatalogItem.Setup(repo => repo.ListAsync(It.IsAny<CatalogItemsSpecification>(), default))
             .ReturnsAsync(catalogItems);
     }
 
@@ -76,6 +76,6 @@ public class CreateOrder
 
         // Assert
         // Verify that AddAsync method was called once with any order object as argument
-        _mockOrderRepository.Verify(repo => repo.AddAsync(It.IsAny<Order>(), CancellationToken.None), Times.Once);
+        _mockOrderRepository.Verify(repo => repo.AddAsync(It.IsAny<Order>(), default), Times.Once);
     }
 }
