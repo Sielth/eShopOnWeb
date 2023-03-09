@@ -22,8 +22,8 @@ Backlog:
 - FavouriteItemViewModel - alessia
 - FavouriteViewModel - alessia
 - Index - alessia
-- FavouriteQueryService 
-- FavouriteViewModelService
+- FavouriteQueryService - tomas
+- FavouriteViewModelService - tomas
 - FavouriteViewComponent Hanaa 
 - FavouriteComponentViewModel Hanaa 
 - front-end Hanaa
