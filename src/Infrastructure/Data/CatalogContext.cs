@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.eShopWeb.ApplicationCore.Entities;
 using Microsoft.eShopWeb.ApplicationCore.Entities.BasketAggregate;
+using Microsoft.eShopWeb.ApplicationCore.Entities.FavouriteAggregate;
 using Microsoft.eShopWeb.ApplicationCore.Entities.OrderAggregate;
 
 namespace Microsoft.eShopWeb.Infrastructure.Data;
@@ -18,6 +19,7 @@ public class CatalogContext : DbContext
     public DbSet<Order> Orders { get; set; }
     public DbSet<OrderItem> OrderItems { get; set; }
     public DbSet<BasketItem> BasketItems { get; set; }
+    public DbSet<FavouriteItem> FavouriteItems { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
