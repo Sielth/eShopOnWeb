@@ -13,7 +13,8 @@ public class FavouriteQueryService : IFavouriteQueryService
     }
     public async Task<int> CountTotalFavourites(string username)
     {
-        // TODO
-        return 0;
+        var totalItems = await _dbContext.FavouriteItems.CountAsync();
+
+        return totalItems;
     }
 }
