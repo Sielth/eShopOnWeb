@@ -28,6 +28,11 @@ public class IndexModel : PageModel
         _usernameHelper = usernameHelper;
     }
     
+    public async Task OnGet()
+    {
+        Favourite = await _favouritesViewModelService.GetOrCreateFavouriteForUser(_usernameHelper.GetOrSetBasketCookieAndUserName(this));
+    }
+    
     public async Task<IActionResult> OnPost(CatalogItemViewModel? productDetails)
     {
         // Id will never be null - TODO: change CatalogItemViewModel Id from int to int? 
@@ -40,7 +45,6 @@ public class IndexModel : PageModel
 
         var favourites = await _favouriteService.AddToFavourites(username, productDetails.Id, item.Price);
         
-        // TODO: Make tests
         FavouriteModel = await _favouritesViewModelService.Map(favourites, default);
 
         return RedirectToPage();
