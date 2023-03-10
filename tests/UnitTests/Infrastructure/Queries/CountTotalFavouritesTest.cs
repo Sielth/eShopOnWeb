@@ -31,8 +31,14 @@ public class CountTotalFavouritesTest
         var options = new DbContextOptions<CatalogContext>();
         var list = GetFakeFavouriteItems();
 
+        var _mockFavouriteItems = new Mock<DbSet<FavouriteItem>>();
+        _mockFavouriteItems.Setup(x => x.AddRangeAsync(list.AsEnumerable(), default));
+
+        var _mockFavourites = new Mock<DbSet<Favourite>>();
+        _mockFavourites.Setup(x => x.AddAsync(new Favourite(_buyerId), default));
+
         var _mockFavouriteDbContext = new Mock<CatalogContext>(options);
-        _mockFavouriteDbContext.Setup(x => x.Set<FavouriteItem>()).ReturnsDbSet(list);
+        _mockFavouriteDbContext.Setup(x => x.Set<FavouriteItem>()).Returns(_mockFavouriteItems.Object);
 
         _favouriteQueryService = new FavouriteQueryService(_mockFavouriteDbContext.Object);
 

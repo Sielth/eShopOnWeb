@@ -20,6 +20,7 @@ public class CatalogContext : DbContext
     public DbSet<OrderItem> OrderItems { get; set; }
     public DbSet<BasketItem> BasketItems { get; set; }
     public DbSet<FavouriteItem> FavouriteItems { get; set; }
+    public DbSet<Favourite> Favourites { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
