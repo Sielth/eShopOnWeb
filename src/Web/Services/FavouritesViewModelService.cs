@@ -24,4 +24,19 @@ public class FavouritesViewModelService : IFavouritesViewModelService
 
         return counter;
     }
+
+    public Task<FavouritesViewModel> GetOrCreateFavouriteForUser(string userName)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<int> CountTotalFavouriteItems(string username)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<FavouritesViewModel> Map(Favourite favourite)
+    {
+        throw new NotImplementedException();
+    }
 }
