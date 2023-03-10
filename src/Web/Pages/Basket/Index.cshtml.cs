@@ -19,12 +19,13 @@ public class IndexModel : PageModel
 
     public IndexModel(IBasketService basketService,
         IBasketViewModelService basketViewModelService,
-        IRepository<CatalogItem> itemRepository, ILogger<IndexModel> logger)
+        IRepository<CatalogItem> itemRepository, ILogger<IndexModel> logger, IUsernameHelper usernameHelper)
     {
         _basketService = basketService;
         _basketViewModelService = basketViewModelService;
         _itemRepository = itemRepository;
         _logger = logger;
+        _usernameHelper = usernameHelper;
     }
 
     public BasketViewModel BasketModel { get; set; } = new();

@@ -16,6 +16,8 @@ public class IndexModel : PageModel
     private readonly IUsernameHelper _usernameHelper;
     
     public FavouritesViewModel FavouriteModel { get; set; } = new();
+    public FavouritesViewModel Favourite { get; set; } = new();
+
 
 
     public IndexModel(IFavouriteService favouriteService, IFavouritesViewModelService favouritesViewModelService, IRepository<CatalogItem> itemRepository, IUsernameHelper usernameHelper)

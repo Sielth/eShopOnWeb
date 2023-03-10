@@ -37,6 +37,9 @@
     <section class="col-lg-1 col-xs-12">
         @await Component.InvokeAsync("Basket")
     </section>
+    <section class="col-lg-1 col-xs-12">
+        @await Component.InvokeAsync("Favourite")
+    </section>
 
 }
 else
@@ -56,5 +59,8 @@ else
 
     <section class="col-lg-1 col-xs-12">
         @await Component.InvokeAsync("Basket")
+    </section>
+    <section class="col-lg-1 col-xs-12">
+        @await Component.InvokeAsync("Favourite")
     </section>
 }

@@ -1,19 +1,92 @@
-﻿@page
+﻿@page "{handler?}"
 @model IndexModel
 
 @{
-    Layout = null;
+    ViewData["Title"] = "Favourite";
 }
+<section class="esh-catalog-hero">
+    <div class="container">
+        <img class="esh-catalog-title" src="~/images/main_banner_text.png" />
+    </div>
+</section>
 
-<!DOCTYPE html>
+<div class="container">
 
-<html>
-<head>
-    <title></title>
-</head>
-<body>
-<div>
-    
+    @if (Model.FavouriteModel.Items.Any())
+    {
+        <form method="post">
+            <article class="esh-favourite-titles row">
+                <br />
+                <section class="esh-favourite-title col-xs-3">Product</section>
+                <section class="esh-favourite-title col-xs-3 hidden-lg-down"></section>
+                <section class="esh-favourite-title col-xs-2">Price</section>
+                <section class="esh-favourite-title col-xs-2">Quantity</section>
+                <section class="esh-favourite-title col-xs-2">Cost</section>
+            </article>
+            <div class="esh-catalog-items row">
+                <div asp-validation-summary="All" class="text-danger"></div>
+               @for (int i = 0; i < Model.FavouriteModel.Items.Count; i++)
+                {
+                    var item = Model.FavouriteModel.Items[i];
+                    <article class="esh-favourite-items row">
+                        <div>
+                            <section class="esh-favourite-item esh-favourite-item--middle col-lg-3 hidden-lg-down">
+                                <img class="esh-favourite-image" src="@item.PictureUrl" />
+                            </section>
+                            <section class="esh-favourite-item esh-favourite-item--middle col-xs-3">@item.ProductName</section>
+                            <section class="esh-favourite-item esh-favourite-item--middle col-xs-2">$ @item.UnitPrice.ToString("N2")</section>
+                            <section class="esh-favourite-item esh-favourite-item--middle col-xs-2">
+                                <input type="hidden" name="@("Items[" + i + "].Id")" value="@item.Id" />
+                                @*<input type="number" class="esh-favourite-input" min="0" name="@("Items[" + i + "].Quantity")" value="@item.Quantity" />*@
+                            </section>
+                            @*<section class="esh-favourite-item esh-favourite-item--middle esh-favourite-item--mark col-xs-2">$ @Math.Round(item.Quantity * item.UnitPrice, 2).ToString("N2")</section>*@
+                        </div>
+                        <div class="row">
+                        </div>
+                    </article>
+                }
+
+               @*<div class="container">
+                    <article class="esh-favourite-titles esh-favourite-titles--clean row">
+                        <section class="esh-favourite-title col-xs-10"></section>
+                        <section class="esh-favourite-title col-xs-2">Total</section>
+                    </article>
+                    <article class="esh-favourite-items row">
+                        <section class="esh-favourite-item col-xs-10"></section>
+                        <section class="esh-favourite-item esh-favourite-item--mark col-xs-2">Delivery Fee: $ @Model.FavouriteModel.CalculateDelivery().ToString("N2")</section>
+                    </article>
+                    <article class="esh-favourite-items row">
+                        <section class="esh-favourite-item col-xs-10"></section>
+                        <section class="esh-favourite-item esh-favourite-item--mark col-xs-2">Total: $ @Model.FavouriteModel.CalculateTotal().ToString("N2")</section>
+                    </article>
+                    <article class="esh-favourite-items row">
+                        <section class="esh-favourite-item col-xs-7"></section>
+                    </article>
+                </div>*@
+                <div class="row">
+                    <section class="esh-favourite-item col-xs-1">
+                        <a asp-page="/Index" class="btn esh-favourite-checkout text-white">[ Continue Shopping ]</a>
+                    </section>
+                    <section class="esh-favourite-item col-xs-push-7 col-xs-4">
+
+                        <button class="btn esh-favourite-checkout" name="updatebutton" value="" type="submit"
+                            asp-page-handler="Update">
+                            [ Update ]
+                        </button>
+                        <a asp-page="./Checkout" class="btn esh-favourite-checkout">[ Checkout ]</a>
+                    </section>
+                </div>
+            </div>
+        </form>
+    }
+    else
+    {
+    <h3 class="esh-catalog-items row">
+    Favourite is empty.
+    </h3>
+
+    <section class="esh-favourite-item">
+    <a asp-page="/Index" class="btn esh-favourite-checkout text-white">[ Continue Shopping ]</a>
+    </section>
+    }
 </div>
-</body>
-</html>

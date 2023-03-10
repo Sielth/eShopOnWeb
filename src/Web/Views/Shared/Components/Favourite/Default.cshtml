@@ -1,0 +1,14 @@
+﻿@model FavouriteComponentViewModel
+
+@{
+    ViewData["Title"] = "My Favourite";
+}
+
+<a class="esh-favouritestatus" asp-page="/Favourite/Index">
+    <div class="esh-favouritestatus-image">
+        <img src="~/images/Favourite.png" />
+    </div>
+    <div class="esh-favouritestatus-badge">
+        @Model.FavourieItemCount    
+    </div>
+</a>
