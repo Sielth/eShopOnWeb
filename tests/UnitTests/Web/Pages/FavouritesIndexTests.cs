@@ -70,7 +70,7 @@ public class FavouritesIndexTests
     }
     
     [Fact]
-    public async Task OnPost_AddItemsFavourites_GetsCalledOnce()
+    public async Task OnPost_AddItemsFavourites_GetsCalledOnce_IfProductDetailsAndItemsAreNotNull()
     {
         // Arrange
         _itemRepository.Setup(x => x.GetByIdAsync(It.IsAny<int>(), default))
@@ -82,6 +82,38 @@ public class FavouritesIndexTests
         await _sut.OnPost(_catalogItemViewModel);
 
         // Assert
-        _favouriteServiceMock.Verify(x => x.AddToFavourites(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<decimal>()));
+        _favouriteServiceMock.Verify(x => x.AddToFavourites(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<decimal>()), Times.Once);
+    }
+    
+    [Fact]
+    public async Task OnPost_AddItemsFavourites_DoesNotGetCalled_IfItemsIsNull()
+    {
+        // Arrange
+        _itemRepository.Setup(x => x.GetByIdAsync(It.IsAny<int>(), default))
+            .ReturnsAsync(null as CatalogItem);
+        _usernameHelper.Setup(x => x.GetOrSetBasketCookieAndUserName(It.IsAny<PageModel>())).Returns("username");
+        _favouriteServiceMock.Setup(x => x.AddToFavourites(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<decimal>()));
+        
+        // Act
+        await _sut.OnPost(_catalogItemViewModel);
+
+        // Assert
+        _favouriteServiceMock.Verify(x => x.AddToFavourites(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<decimal>()), Times.Never);
+    }
+    
+    [Fact]
+    public async Task OnPost_AddItemsFavourites_DoesNotGetCalled_IfProductDetailsIsNull()
+    {
+        // Arrange
+        _itemRepository.Setup(x => x.GetByIdAsync(It.IsAny<int>(), default))
+            .ReturnsAsync(_catalogItem);
+        _usernameHelper.Setup(x => x.GetOrSetBasketCookieAndUserName(It.IsAny<PageModel>())).Returns("username");
+        _favouriteServiceMock.Setup(x => x.AddToFavourites(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<decimal>()));
+        
+        // Act
+        await _sut.OnPost(null);
+
+        // Assert
+        _favouriteServiceMock.Verify(x => x.AddToFavourites(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<decimal>()), Times.Never);
     }
 }

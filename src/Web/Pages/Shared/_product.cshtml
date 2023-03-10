@@ -5,9 +5,9 @@
 <form asp-page="/Basket/Index" method="post">
     <input class="esh-catalog-button" type="submit" value="[ ADD TO BASKET ]"/>
 </form>
-@* <form asp-page="/Basket/Index" method="get"> *@
-@*     <input class="esh-catalog-button" type="submit" name="addToFavorites" value="[ ADD TO FAVORITES ]"/> *@
-@* </form> *@
+<form asp-page="/Favourites/Index" method="post">
+    <input class="esh-catalog-button" type="submit" value="[ ADD TO FAVORITES ]"/>
+</form>
 <div class="esh-catalog-name">
     <span>@Model.Name</span>
 </div>
