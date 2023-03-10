@@ -12,15 +12,15 @@ public class CatalogContext : DbContext
     #pragma warning disable CS8618 // Required by Entity Framework
     public CatalogContext(DbContextOptions<CatalogContext> options) : base(options) {}
 
-    public DbSet<Basket> Baskets { get; set; }
-    public DbSet<CatalogItem> CatalogItems { get; set; }
-    public DbSet<CatalogBrand> CatalogBrands { get; set; }
-    public DbSet<CatalogType> CatalogTypes { get; set; }
-    public DbSet<Order> Orders { get; set; }
-    public DbSet<OrderItem> OrderItems { get; set; }
-    public DbSet<BasketItem> BasketItems { get; set; }
-    public DbSet<FavouriteItem> FavouriteItems { get; set; }
-    public DbSet<Favourite> Favourites { get; set; }
+    public virtual DbSet<Basket> Baskets { get; set; }
+    public virtual DbSet<CatalogItem> CatalogItems { get; set; }
+    public virtual DbSet<CatalogBrand> CatalogBrands { get; set; }
+    public virtual DbSet<CatalogType> CatalogTypes { get; set; }
+    public virtual DbSet<Order> Orders { get; set; }
+    public virtual DbSet<OrderItem> OrderItems { get; set; }
+    public virtual DbSet<BasketItem> BasketItems { get; set; }
+    public virtual DbSet<FavouriteItem> FavouriteItems { get; set; }
+    public virtual DbSet<Favourite> Favourites { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
