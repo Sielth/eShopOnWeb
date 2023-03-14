@@ -1,6 +1,6 @@
 ﻿namespace Microsoft.eShopWeb.Web.Pages.Favourites;
 
-public class FavouritesViewModel
+public class FavouriteViewModel
 {
     public int Id { get; set; }
     public List<FavouriteItemViewModel> Items { get; set; } = new();

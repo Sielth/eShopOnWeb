@@ -6,9 +6,7 @@ namespace Microsoft.eShopWeb.Web.Interfaces;
 
 public interface IFavouritesViewModelService
 {
-    Task<FavouritesViewModel> Map(Favourite favourite, CancellationToken cancellationToken);
-
-    Task<FavouritesViewModel> GetOrCreateFavouriteForUser(string userName);
+    Task<FavouriteViewModel> GetOrCreateFavouriteForUser(string userName);
     Task<int> CountTotalFavouriteItems(string username);
-    Task<FavouritesViewModel> Map(Favourite favourite);
+    Task<FavouriteViewModel> Map(Favourite favourite);
 }

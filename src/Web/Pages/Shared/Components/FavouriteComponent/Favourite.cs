@@ -21,7 +21,6 @@ public class Favourite : ViewComponent
     {
         var vm = new FavouriteComponentViewModel
         {
-            // FavourieItemCount = 3 // TODO: do right!!! await CountTotalBasketItems()
             FavourieItemCount = await CountTotalFavouriteItems()
         };
         return View(vm);

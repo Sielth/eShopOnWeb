@@ -6,6 +6,5 @@ public class FavouriteItemViewModel
     public int CatalogItemId { get; set; }
     public string? ProductName { get; set; }
     public decimal UnitPrice { get; set; }
-    public decimal OldUnitPrice { get; set; }
     public string? PictureUrl { get; set; }
 }

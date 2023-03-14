@@ -14,38 +14,47 @@ public class IndexModel : PageModel
     private readonly IFavouritesViewModelService _favouritesViewModelService;
     private readonly IRepository<CatalogItem> _itemRepository;
     private readonly IUsernameHelper _usernameHelper;
+    private readonly ILogger<IndexModel> _logger;
     
-    public FavouritesViewModel FavouriteModel { get; set; } = new();
-    public FavouritesViewModel Favourite { get; set; } = new();
+    public FavouriteViewModel FavouriteModel { get; set; } = new();
 
-
-
-    public IndexModel(IFavouriteService favouriteService, IFavouritesViewModelService favouritesViewModelService, IRepository<CatalogItem> itemRepository, IUsernameHelper usernameHelper)
+    public IndexModel(IFavouriteService favouriteService, IFavouritesViewModelService favouritesViewModelService, IRepository<CatalogItem> itemRepository, IUsernameHelper usernameHelper, ILogger<IndexModel> logger)
     {
         _favouriteService = favouriteService;
         _favouritesViewModelService = favouritesViewModelService;
         _itemRepository = itemRepository;
         _usernameHelper = usernameHelper;
+        _logger = logger;
     }
     
     public async Task OnGet()
     {
-        Favourite = await _favouritesViewModelService.GetOrCreateFavouriteForUser(_usernameHelper.GetOrSetBasketCookieAndUserName(this));
+        _logger.LogInformation($"---> {nameof(OnGet)} called.");
+        FavouriteModel = await _favouritesViewModelService.GetOrCreateFavouriteForUser(_usernameHelper.GetOrSetBasketCookieAndUserName(this));
+        _logger.LogInformation($"---> {nameof(FavouriteModel)} with BuyerId: {FavouriteModel.BuyerId}");
     }
     
     public async Task<IActionResult> OnPost(CatalogItemViewModel? productDetails)
     {
-        // Id will never be null - TODO: change CatalogItemViewModel Id from int to int? 
+        Console.WriteLine("Here in OnPost");
+        _logger.LogInformation($"---> {nameof(OnPost)} called.");
+
+        // Id will never be null - TODO: change CatalogItemViewModel Id from int to int?
+        _logger.LogInformation($"---> ProductId: {productDetails.Id}.");
         if (productDetails?.Id == null) return RedirectToPage("/Index");
 
         var item = await _itemRepository.GetByIdAsync(productDetails.Id);
+        _logger.LogInformation($"---> ItemId: {item.Id}.");
         if (item is null) return RedirectToPage("/Index");
 
         var username = _usernameHelper.GetOrSetBasketCookieAndUserName(this);
+        _logger.LogInformation($"---> Username: {username}.");
 
-        var favourites = await _favouriteService.AddToFavourites(username, productDetails.Id, item.Price);
-        
-        FavouriteModel = await _favouritesViewModelService.Map(favourites, default);
+        var favourite = await _favouriteService.AddToFavourites(username, productDetails.Id, item.Price);
+        _logger.LogInformation($"---> FavouriteId: {favourite.Id}.");
+
+        FavouriteModel = await _favouritesViewModelService.Map(favourite);
+        _logger.LogInformation($"---> FavouriteModelId: {FavouriteModel.Id}.");
 
         return RedirectToPage();
     }

@@ -20,19 +20,16 @@ public class Favourite : BaseEntity, IAggregateRoot
     public int CatalogTypeID { get; private set; }
     public Favourite(string buyerId)
     {
-      
         BuyerId = buyerId;
     }
 
     public void AddItem(int catalogItemID, decimal price)
     {
-        //if (!Items.Any(i => i.CatalogItemId == catalogItemID))
-        //{
-        //    _favouriteitems.Add(new FavouriteItem(CatalogTypeID, price));
-        //    return;
-        //}
-        //var existingItem = Items.First(i => i.CatalogItemId == CatalogTypeID);
-      
+        if (!Items.Any(i => i.CatalogItemId == catalogItemID))
+        {
+            _favouriteitems.Add(new FavouriteItem(CatalogTypeID, price));
+            return;
+        }
     }
    
     public void SetNewBuyerId(string buyerId)

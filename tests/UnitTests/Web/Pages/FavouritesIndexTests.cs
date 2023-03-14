@@ -25,7 +25,7 @@ public class FavouritesIndexTests
     private CatalogItemViewModel? _catalogItemViewModel =
         new() { Id = 1, Name = "name", Price = 10m, PictureUri = "pictureUri" };
 
-    private FavouritesViewModel _favouritesViewModel =
+    private FavouriteViewModel _favouriteViewModel =
         new() { BuyerId = "buyerId", Id = 1, Items = new List<FavouriteItemViewModel>() };
 
     private CatalogItem _catalogItem = new CatalogItem(1, 1, "description", "name", 10m, "pictureUri");

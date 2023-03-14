@@ -12,6 +12,7 @@ using Microsoft.eShopWeb;
 using Microsoft.eShopWeb.ApplicationCore.Interfaces;
 using Microsoft.eShopWeb.ApplicationCore.Services;
 using Microsoft.eShopWeb.Infrastructure.Data;
+using Microsoft.eShopWeb.Infrastructure.Data.Queries;
 using Microsoft.eShopWeb.Infrastructure.Identity;
 using Microsoft.eShopWeb.Web;
 using Microsoft.eShopWeb.Web.Configuration;
@@ -45,7 +46,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
 builder.Services.AddScoped<ITokenClaimsService, IdentityTokenClaimService>();
 builder.Services.AddScoped<IUsernameHelper, UsernameHelper>();
 builder.Services.AddScoped<IFavouriteService, FavouriteService>();
-builder.Services.AddScoped<IFavouritesViewModelService, FavouritesViewModelService>();
+builder.Services.AddScoped<IFavouritesViewModelService, FavouriteViewModelService>();
 builder.Services.AddScoped<IFavouriteQueryService, FavouriteQueryService>();
 builder.Configuration.AddEnvironmentVariables();
 builder.Services.AddCoreServices(builder.Configuration);
