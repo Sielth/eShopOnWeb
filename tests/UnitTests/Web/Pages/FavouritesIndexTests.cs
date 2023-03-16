@@ -1,14 +1,12 @@
-﻿using System.Security.Claims;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.eShopWeb.ApplicationCore.Entities;
-using Microsoft.eShopWeb.ApplicationCore.Entities.FavouriteAggregate;
 using Microsoft.eShopWeb.ApplicationCore.Interfaces;
 using Microsoft.eShopWeb.Web.Interfaces;
 using Microsoft.eShopWeb.Web.Pages.Favourites;
 using Microsoft.eShopWeb.Web.Pages.Shared.Username;
 using Microsoft.eShopWeb.Web.ViewModels;
-using Microsoft.Identity.Client;
+using Microsoft.Extensions.Logging;
 using Moq;
 using Xunit;
 
@@ -21,6 +19,7 @@ public class FavouritesIndexTests
     private readonly Mock<IFavouritesViewModelService> _favouriteViewModelService = new();
     private readonly Mock<IRepository<CatalogItem>> _itemRepository = new();
     private readonly Mock<IUsernameHelper> _usernameHelper = new();
+    private readonly Mock<ILogger<IndexModel>> _logger = new();
 
     private CatalogItemViewModel? _catalogItemViewModel =
         new() { Id = 1, Name = "name", Price = 10m, PictureUri = "pictureUri" };
@@ -34,7 +33,7 @@ public class FavouritesIndexTests
 
     public FavouritesIndexTests()
     {
-        _sut = new IndexModel(_favouriteServiceMock.Object, _favouriteViewModelService.Object, _itemRepository.Object, _usernameHelper.Object);
+        _sut = new IndexModel(_favouriteServiceMock.Object, _favouriteViewModelService.Object, _itemRepository.Object, _usernameHelper.Object, _logger.Object);
     }
 
     // --- 
