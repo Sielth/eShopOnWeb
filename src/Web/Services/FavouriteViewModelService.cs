@@ -13,19 +13,22 @@ public class FavouriteViewModelService : IFavouritesViewModelService
     private readonly IRepository<Favourite> _favouriteRepository;
     private readonly IRepository<CatalogItem> _itemRepository;
     private readonly IUriComposer _uriComposer;
+    private ILogger<FavouriteViewModelService> _logger;
 
-    public FavouriteViewModelService(IFavouriteQueryService favouriteQueryService, IRepository<Favourite> favouriteRepository, IRepository<CatalogItem> itemRepository, IUriComposer uriComposer)
+    public FavouriteViewModelService(IFavouriteQueryService favouriteQueryService, IRepository<Favourite> favouriteRepository, IRepository<CatalogItem> itemRepository, IUriComposer uriComposer, ILogger<FavouriteViewModelService> logger)
     {
         _favouriteQueryService = favouriteQueryService;
         _favouriteRepository = favouriteRepository;
         _itemRepository = itemRepository;
         _uriComposer = uriComposer;
+        _logger = logger;
     }
     
     public async Task<FavouriteViewModel> GetOrCreateFavouriteForUser(string username)
     {
         var favouriteSpec = new FavouriteWithItemsSpecification(username);
-        var favourite = (await _favouriteRepository.FirstOrDefaultAsync(favouriteSpec));
+        _logger.LogInformation(favouriteSpec.ToString());
+        var favourite = await _favouriteRepository.FirstOrDefaultAsync(favouriteSpec);
 
         if (favourite == null)
         {
@@ -54,6 +57,7 @@ public class FavouriteViewModelService : IFavouritesViewModelService
 
         var items = favouriteItems.Select(favouriteItem =>
         {
+            _logger.LogInformation($"---> CatalogItemId: {favouriteItem.CatalogItemId}");
             var catalogItem = catalogItems.First(c => c.Id == favouriteItem.CatalogItemId);
 
             var basketItemViewModel = new FavouriteItemViewModel()

@@ -12,8 +12,8 @@ public class Favourite : BaseEntity, IAggregateRoot
 {
     public string BuyerId { get; private set; }
 
-    private readonly List<FavouriteItem> _favouriteitems = new List<FavouriteItem>();
-    public IReadOnlyCollection<FavouriteItem> Items => _favouriteitems.AsReadOnly();
+    private readonly List<FavouriteItem> _items = new();
+    public IReadOnlyCollection<FavouriteItem> Items => _items.AsReadOnly();
     public int Quantity { get; private set; }
     public int CatalogItemId { get; private set; }
   
@@ -23,11 +23,11 @@ public class Favourite : BaseEntity, IAggregateRoot
         BuyerId = buyerId;
     }
 
-    public void AddItem(int catalogItemID, decimal price)
+    public void AddItem(int catalogItemId, decimal price)
     {
-        if (!Items.Any(i => i.CatalogItemId == catalogItemID))
+        if (Items.Any(i => i.CatalogItemId == catalogItemId) is false)
         {
-            _favouriteitems.Add(new FavouriteItem(CatalogTypeID, price));
+            _items.Add(new FavouriteItem(catalogItemId, price));
             return;
         }
     }

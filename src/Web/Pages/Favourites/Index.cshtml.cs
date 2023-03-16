@@ -51,7 +51,7 @@ public class IndexModel : PageModel
         _logger.LogInformation($"---> Username: {username}.");
 
         var favourite = await _favouriteService.AddToFavourites(username, productDetails.Id, item.Price);
-        _logger.LogInformation($"---> FavouriteId: {favourite.Id}.");
+        _logger.LogInformation($"---> FavouriteId: {favourite.Id}, Count: {favourite.Items.Count} CatalogItemId: {favourite.Items.FirstOrDefault()?.CatalogItemId}.");
 
         FavouriteModel = await _favouritesViewModelService.Map(favourite);
         _logger.LogInformation($"---> FavouriteModelId: {FavouriteModel.Id}.");

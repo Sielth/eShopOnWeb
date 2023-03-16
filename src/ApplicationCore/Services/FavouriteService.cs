@@ -20,18 +20,17 @@ public class FavouriteService : IFavouriteService
     public async Task<Favourite> AddToFavourites(string username, int catalogItemId, decimal price)
     {
         var favouritesSpec = new FavouriteItemsSpecification(username);
-        var favourites = await _favouriteRepository.FirstOrDefaultAsync(favouritesSpec);
+        var favourite = await _favouriteRepository.FirstOrDefaultAsync(favouritesSpec);
 
-        if (favourites is null)
+        if (favourite is null)
         {
-            favourites = new Favourite(username);
-            await _favouriteRepository.AddAsync(favourites);
+            favourite = new Favourite(username);
+            await _favouriteRepository.AddAsync(favourite);
         }
-        
-        favourites.AddItem(catalogItemId, price);
+        favourite.AddItem(catalogItemId, price);
 
-        await _favouriteRepository.UpdateAsync(favourites);
-        return favourites;
+        await _favouriteRepository.UpdateAsync(favourite);
+        return favourite;
     }
     // TODO
 }
