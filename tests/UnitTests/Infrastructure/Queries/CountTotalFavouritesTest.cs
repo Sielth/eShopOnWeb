@@ -52,7 +52,7 @@ public class CountTotalFavouritesTest
         var buyerId = "buyer1";
         var favourites = GetFakeFavourite();
         
-        //https://github.com/MichalJankowskii/Moq.EntityFrameworkCore ReturnsDbSet
+        // https://github.com/MichalJankowskii/Moq.EntityFrameworkCore ReturnsDbSet
         _mockCatalogDbContext.Setup(x => x.Favourites).ReturnsDbSet(favourites);
         
         // Act

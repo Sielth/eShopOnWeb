@@ -19,6 +19,7 @@
 
 # Backlog:
 ## TODO
+- 
 ## ACTIVE
 - Fix basket (alessia - waiting to be merged) 
 - FavouriteQueryService (tomas)
