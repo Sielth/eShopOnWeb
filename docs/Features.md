@@ -19,19 +19,20 @@
 
 # Backlog:
 ## TODO
-- 
+- Add specflow tests for favourites or basket
 ## ACTIVE
-- Fix basket (alessia - waiting to be merged) 
-- FavouriteQueryService (tomas)
 - FavouriteViewModelService (tomas)
 ## DONE
+- FavouriteQueryService (tomas)
+
 - FavouriteViewComponent (hanaa)
 - FavouriteComponentViewModel (hanaa)
 - front-end (hanaa)
 
+- Fix basket (alessia - waiting to be merged)
 - FavouriteItemViewModel (alessia)
 - FavouriteViewModel (alessia)
 - Favourite/Index (alessia)
 - Add button that redirects to Favourites/Index (alessia)
-..
+
 
