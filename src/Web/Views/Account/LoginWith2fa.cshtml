@@ -30,10 +30,13 @@
         </form>
     </div>
 </div>
-<p>
-    Don't have access to your authenticator device? You can
-    <a asp-action="LoginWithRecoveryCode" asp-route-returnUrl="@ViewData["ReturnUrl"]">log in with a recovery code</a>.
-</p>
+
+@* TODO: Some of the code is commented, to avoid showing errors that are not important to fix right now *@
+
+@* <p> *@
+@*     Don't have access to your authenticator device? You can *@
+@*     <a asp-action="LoginWithRecoveryCode" asp-route-returnUrl="@ViewData["ReturnUrl"]">log in with a recovery code</a>. *@
+@* </p> *@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

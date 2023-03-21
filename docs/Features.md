@@ -19,16 +19,20 @@
 
 # Backlog:
 ## TODO
-- 
+- Move SpecFlow tests from side project to eShopOnContainer
+- Research how many tests we need
+- Think whether to start on a new feature?
 ## ACTIVE
-- Fix basket (alessia - waiting to be merged) 
+## DONE
 - FavouriteQueryService (tomas)
 - FavouriteViewModelService (tomas)
-## DONE
+
 - FavouriteViewComponent (hanaa)
 - FavouriteComponentViewModel (hanaa)
 - front-end (hanaa)
 
+- Downgrade to .NET 6
+- Fix basket (alessia - waiting to be merged) 
 - FavouriteItemViewModel (alessia)
 - FavouriteViewModel (alessia)
 - Favourite/Index (alessia)
