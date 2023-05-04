@@ -33,7 +33,7 @@ public class FavouritesIndexTests
 
     public FavouritesIndexTests()
     {
-        _sut = new IndexModel(_favouriteServiceMock.Object, _favouriteViewModelService.Object, _itemRepository.Object, _usernameHelper.Object);
+        // _sut = new IndexModel(_favouriteServiceMock.Object, _favouriteViewModelService.Object, _itemRepository.Object, _usernameHelper.Object);
     }
 
     // --- 
