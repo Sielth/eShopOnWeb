@@ -56,6 +56,14 @@ public class RegisterModel : PageModel
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string? ConfirmPassword { get; set; }
+            
+        [Display(Name = "Membership Plus")]
+        public bool? MembershipPlus { get; set; }
+        
+        [DataType(DataType.CreditCard)]
+        [Display(Name = "Credit Card Number")]
+        public string? CreditCardNumber { get; set; }
+        
     }
 
     public void OnGet(string? returnUrl = null)
@@ -68,7 +76,7 @@ public class RegisterModel : PageModel
         returnUrl = returnUrl ?? Url.Content("~/");
         if (ModelState.IsValid)
         {
-            var user = new ApplicationUser { UserName = Input?.Email, Email = Input?.Email };
+            var user = new ApplicationUser { UserName = Input?.Email, Email = Input?.Email, MembershipPlus = Input?.MembershipPlus ?? false};
             var result = await _userManager.CreateAsync(user, Input?.Password);
             if (result.Succeeded)
             {
