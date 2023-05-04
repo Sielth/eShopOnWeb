@@ -41,11 +41,22 @@ public class CheckoutModel : PageModel
         await SetBasketModelAsync();
     }
 
+    public decimal GetPriceAfterDiscount()
+    {
+        decimal points = ((MemberUser)User.Identity).MemberPoints; // TODO: find how to get applicationUser
+        decimal total = 0; // TODO: Get Total from Basket
+        decimal procentDiscount = points / 10;
+        decimal multiplier = (100 - procentDiscount) / 100;
+        decimal priceAfterDiscount = total * multiplier;
+        return priceAfterDiscount;
+    }
+
     public async Task<IActionResult> OnPost(IEnumerable<BasketItemViewModel> items)
     {
         try
         {
             await SetBasketModelAsync();
+            if (User is MemberUser) GetPriceAfterDiscount(); //TODO: How to change total
 
             if (!ModelState.IsValid)
             {

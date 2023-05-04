@@ -20,4 +20,15 @@ public class BasketViewModel
     {
         return CalculateItemsTotalPrice() + CalculateDelivery();
     }
+
+    public int AddPoints()
+    {
+        var totalWithoutDelivery = CalculateItemsTotalPrice();
+        if (totalWithoutDelivery >= 100)
+        {
+            return (int)Math.Floor(totalWithoutDelivery/10);
+        }
+
+        return 0;
+    }
 }

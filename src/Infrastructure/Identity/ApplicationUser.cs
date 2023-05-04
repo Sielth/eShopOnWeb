@@ -14,4 +14,5 @@ public class MemberUser : ApplicationUser
 {
     public int MemberPoints { get; set; }
     public string CreditCardInfo { get; set; } // TODO: Define
+    
 }

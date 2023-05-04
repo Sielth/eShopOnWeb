@@ -1,10 +1,9 @@
-﻿using System.Composition;
-using Microsoft.eShopWeb.Web.Pages.Basket;
+﻿using Microsoft.eShopWeb.Web.Pages.Basket;
 using Xunit;
 
 namespace Microsoft.eShopWeb.UnitTests.Web.Pages;
 
-public class BasketViewModelTests
+public class PointsTests
 {
     public static IEnumerable<object[]> Data =>
         new List<object[]>
@@ -21,7 +20,7 @@ public class BasketViewModelTests
                     Quantity = 10,
                     UnitPrice = 10m
                 }
-            }, 300 },
+            }, 10 },
             new object[] { new List<BasketItemViewModel>
             {
                 new()
@@ -34,7 +33,7 @@ public class BasketViewModelTests
                     Quantity = 10,
                     UnitPrice = 40m
                 }
-            }, 0 },            
+            }, 40 },            
             new object[] { new List<BasketItemViewModel>
             {
                 new()
@@ -47,7 +46,7 @@ public class BasketViewModelTests
                     Quantity = 1,
                     UnitPrice = 500m
                 }
-            }, 0 },
+            }, 50 },
             new object[] { new List<BasketItemViewModel>
             {
                 new()
@@ -60,13 +59,13 @@ public class BasketViewModelTests
                     Quantity = 1,
                     UnitPrice = 50m
                 }
-            }, 300 },
+            }, 0 },
         }; // TODO: move in another class
     private BasketViewModel? _basketViewModel;
-
+    
     [Theory]
     [MemberData(nameof(Data))]
-    public void DeliveryFee(List<BasketItemViewModel> basketItemViewModels, decimal expected)
+    public void MemberUserGetsPointsDependingOnTotal(List<BasketItemViewModel> basketItemViewModels, int expected)
     {
         // Arrange
         _basketViewModel = new BasketViewModel
@@ -75,32 +74,9 @@ public class BasketViewModelTests
             BuyerId = "buyer1",
             Items = basketItemViewModels
         };
-        
-        // Act
-        var delivery = _basketViewModel.CalculateDelivery();
-
-        // Assert
-        Assert.Equal(expected, _basketViewModel.CalculateDelivery());
-    }
-
-    [Theory]
-    [MemberData(nameof(Data))]
-    public void MemberUserGetsPointsDependingOnTotal(List<BasketItemViewModel> basketItemViewModels)
-    {
-        // Arrange
-        _basketViewModel = new BasketViewModel
-        {
-            Id = 1,
-            BuyerId = "buyer1",
-            Items = basketItemViewModels
-        };
-
-        var expected = 105;
-        var totalWithoutDelivery = _basketViewModel.CalculateItemsTotalPrice();
 
         // Act
         var points = _basketViewModel.AddPoints();
-        // var points = Math.Floor(totalWithoutDelivery/10);
 
         // Assert
         Assert.Equal(expected, points);
