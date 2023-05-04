@@ -25,8 +25,9 @@
                 }
                 else
                 {
-                <input asp-for="Email" class="form-control" />
-                <button asp-action="SendVerificationEmail" class="btn btn-link">Send verification email</button>
+                    <input asp-for="Email" class="form-control" />
+                    // TODO: Some of the code is commented, to avoid showing errors that are not important to fix right now
+                @* <button asp-action="SendVerificationEmail" class="btn btn-link">Send verification email</button> *@
                 }
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>

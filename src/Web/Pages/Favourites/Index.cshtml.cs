@@ -40,21 +40,21 @@ public class IndexModel : PageModel
         _logger.LogInformation($"---> {nameof(OnPost)} called.");
 
         // Id will never be null - TODO: change CatalogItemViewModel Id from int to int?
-        _logger.LogInformation($"---> ProductId: {productDetails.Id}.");
-        if (productDetails?.Id == null) return RedirectToPage("/Index");
+        _logger.LogInformation($"---> ProductId: {productDetails?.Id}.");
+        if (productDetails?.Id is null) return RedirectToPage("/Index");
 
         var item = await _itemRepository.GetByIdAsync(productDetails.Id);
-        _logger.LogInformation($"---> ItemId: {item.Id}.");
+        _logger.LogInformation($"---> ItemId: {item?.Id}.");
         if (item is null) return RedirectToPage("/Index");
 
         var username = _usernameHelper.GetOrSetBasketCookieAndUserName(this);
         _logger.LogInformation($"---> Username: {username}.");
 
         var favourite = await _favouriteService.AddToFavourites(username, productDetails.Id, item.Price);
-        _logger.LogInformation($"---> FavouriteId: {favourite.Id}, Count: {favourite.Items.Count} CatalogItemId: {favourite.Items.FirstOrDefault()?.CatalogItemId}.");
+        _logger.LogInformation($"---> FavouriteId: {favourite?.Id}, Count: {favourite?.Items?.Count} CatalogItemId: {favourite?.Items?.FirstOrDefault()?.CatalogItemId}.");
 
         FavouriteModel = await _favouritesViewModelService.Map(favourite);
-        _logger.LogInformation($"---> FavouriteModelId: {FavouriteModel.Id}.");
+        _logger.LogInformation($"---> FavouriteModelId: {FavouriteModel?.Id}.");
 
         return RedirectToPage();
     }
