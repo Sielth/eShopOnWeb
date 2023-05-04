@@ -23,7 +23,9 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\eShopOnWeb\src\ApplicationCore\ApplicationCore.csproj" />
       <ProjectReference Include="..\..\src\ApplicationCore\ApplicationCore.csproj" />
+      <ProjectReference Include="..\SpecFlowShop\SpecFlowShop.csproj" />
     </ItemGroup>
 
 </Project>
