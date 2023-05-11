@@ -3,27 +3,25 @@ using Microsoft.eShopWeb.ApplicationCore.Entities.FavouriteAggregate;
 using Microsoft.eShopWeb.ApplicationCore.Interfaces;
 using Microsoft.eShopWeb.ApplicationCore.Specifications;
 using Microsoft.eShopWeb.Web.Interfaces;
+using Microsoft.eShopWeb.Web.Mapping.Favourites;
 using Microsoft.eShopWeb.Web.Pages.Favourites;
 
 namespace Microsoft.eShopWeb.Web.Services;
 
 public class FavouriteViewModelService : IFavouritesViewModelService
 {
-    private readonly IFavouriteQueryService _favouriteQueryService;
+   
     private readonly IRepository<Favourite> _favouriteRepository;
-    private readonly IRepository<CatalogItem> _itemRepository;
-    private readonly IUriComposer _uriComposer;
     private ILogger<FavouriteViewModelService> _logger;
+    private readonly IFavouriteMapper _favouriteMapper;
 
-    public FavouriteViewModelService(IFavouriteQueryService favouriteQueryService, IRepository<Favourite> favouriteRepository, IRepository<CatalogItem> itemRepository, IUriComposer uriComposer, ILogger<FavouriteViewModelService> logger)
+    public FavouriteViewModelService( IRepository<Favourite> favouriteRepository, ILogger<FavouriteViewModelService> logger, IFavouriteMapper favouriteMapper)
     {
-        _favouriteQueryService = favouriteQueryService;
         _favouriteRepository = favouriteRepository;
-        _itemRepository = itemRepository;
-        _uriComposer = uriComposer;
         _logger = logger;
+        _favouriteMapper = favouriteMapper;
     }
-    
+
     public async Task<FavouriteViewModel> GetOrCreateFavouriteForUser(string username)
     {
         var favouriteSpec = new FavouriteWithItemsSpecification(username);
@@ -34,7 +32,7 @@ public class FavouriteViewModelService : IFavouritesViewModelService
         {
             return await CreateFavouriteForUser(username);
         }
-        var viewModel = await Map(favourite);
+        var viewModel = await _favouriteMapper.Mapto(favourite);
         return viewModel;
     }
 
@@ -49,45 +47,7 @@ public class FavouriteViewModelService : IFavouritesViewModelService
             Id = favourite.Id,
         };
     }
-    
-    private async Task<List<FavouriteItemViewModel>> GetFavouriteItems(IReadOnlyCollection<FavouriteItem> favouriteItems)
-    {
-        var catalogItemsSpecification = new CatalogItemsSpecification(favouriteItems.Select(b => b.CatalogItemId).ToArray());
-        var catalogItems = await _itemRepository.ListAsync(catalogItemsSpecification);
 
-        var items = favouriteItems.Select(favouriteItem =>
-        {
-            _logger.LogInformation($"---> CatalogItemId: {favouriteItem.CatalogItemId}");
-            var catalogItem = catalogItems.First(c => c.Id == favouriteItem.CatalogItemId);
+ 
 
-            var basketItemViewModel = new FavouriteItemViewModel()
-            {
-                Id = favouriteItem.Id,
-                UnitPrice = favouriteItem.UnitPrice,
-                CatalogItemId = favouriteItem.CatalogItemId,
-                PictureUrl = _uriComposer.ComposePicUri(catalogItem.PictureUri),
-                ProductName = catalogItem.Name
-            };
-            return basketItemViewModel;
-        }).ToList();
-
-        return items;
-    }
-    
-    public async Task<FavouriteViewModel> Map(Favourite favourite)
-    {
-        return new FavouriteViewModel()
-        {
-            BuyerId = favourite.BuyerId,
-            Id = favourite.Id,
-            Items = await GetFavouriteItems(favourite.Items)
-        };
-    }
-
-    public async Task<int> CountTotalFavouriteItems(string username)
-    {
-        var counter = await _favouriteQueryService.CountTotalFavourites(username);
-
-        return counter;
-    }
 }
