@@ -47,7 +47,4 @@ public class FavouriteViewModelService : IFavouritesViewModelService
             Id = favourite.Id,
         };
     }
-
- 
-
 }

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.eShopWeb.Infrastructure.Identity;
 using Microsoft.eShopWeb.Web.Interfaces;
+using Microsoft.eShopWeb.Web.Services.FavouriteHeplers;
 using Microsoft.eShopWeb.Web.ViewModels;
 using System;
 using System.Threading.Tasks;
@@ -16,6 +17,7 @@ public class Favourite : ViewComponent
 {
     private readonly IFavouritesViewModelService _favouriteService;
     private readonly SignInManager<ApplicationUser> _signInManager;
+    private readonly IFavouritItemseHelper _favouritItemseHelper;
 
     public async Task<IViewComponentResult> InvokeAsync()
     {
@@ -38,14 +40,14 @@ public class Favourite : ViewComponent
         if (_signInManager.IsSignedIn(HttpContext.User))
         {
             Guard.Against.Null(User?.Identity?.Name, nameof(User.Identity.Name));
-            return await _favouriteService.CountTotalFavouriteItems(User.Identity.Name);
+            return await _favouritItemseHelper.CountTotalFavouriteItems(User.Identity.Name);
         }
 
         string? anonymousId = GetAnnonymousIdFromCookie();
         if (anonymousId == null)
             return 0;
 
-        return await _favouriteService.CountTotalFavouriteItems(anonymousId);
+        return await _favouritItemseHelper.CountTotalFavouriteItems(anonymousId);
     }
     private string? GetAnnonymousIdFromCookie()
     {

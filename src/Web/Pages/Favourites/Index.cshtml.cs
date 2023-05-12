@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.eShopWeb.ApplicationCore.Entities;
 using Microsoft.eShopWeb.ApplicationCore.Interfaces;
 using Microsoft.eShopWeb.Web.Interfaces;
+using Microsoft.eShopWeb.Web.Mapping.Favourites;
 using Microsoft.eShopWeb.Web.Pages.Shared.Username;
 using Microsoft.eShopWeb.Web.ViewModels;
 
@@ -15,6 +16,7 @@ public class IndexModel : PageModel
     private readonly IRepository<CatalogItem> _itemRepository;
     private readonly IUsernameHelper _usernameHelper;
     private readonly ILogger<IndexModel> _logger;
+    private readonly IFavouriteMapper _favouriteMapper;
     
     public FavouriteViewModel FavouriteModel { get; set; } = new();
 
@@ -53,7 +55,7 @@ public class IndexModel : PageModel
         var favourite = await _favouriteService.AddToFavourites(username, productDetails.Id, item.Price);
         _logger.LogInformation($"---> FavouriteId: {favourite?.Id}, Count: {favourite?.Items?.Count} CatalogItemId: {favourite?.Items?.FirstOrDefault()?.CatalogItemId}.");
 
-        FavouriteModel = await _favouritesViewModelService.Map(favourite);
+        FavouriteModel = await _favouriteMapper.Mapto(favourite);
         _logger.LogInformation($"---> FavouriteModelId: {FavouriteModel?.Id}.");
 
         return RedirectToPage();
