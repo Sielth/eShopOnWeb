@@ -14,7 +14,6 @@ public class FavouriteService : IFavouriteService
     public FavouriteService(IRepository<Favourite> favouriteRepository)
     {
         _favouriteRepository = favouriteRepository;
-        // TODO
     }
 
     public async Task<Favourite> AddToFavourites(string username, int catalogItemId, decimal price)
@@ -32,5 +31,4 @@ public class FavouriteService : IFavouriteService
         await _favouriteRepository.UpdateAsync(favourite);
         return favourite;
     }
-    // TODO
 }

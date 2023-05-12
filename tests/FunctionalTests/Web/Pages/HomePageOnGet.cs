@@ -1,7 +1,6 @@
-﻿using Microsoft.eShopWeb.FunctionalTests.Web;
-using Xunit;
+﻿using Xunit;
 
-namespace Microsoft.eShopWeb.FunctionalTests.WebRazorPages;
+namespace Microsoft.eShopWeb.FunctionalTests.Web.Pages;
 
 [Collection("Sequential")]
 public class HomePageOnGet : IClassFixture<TestApplication>

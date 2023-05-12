@@ -8,6 +8,8 @@ using Xunit;
 
 namespace Microsoft.eShopWeb.UnitTests.Web.Services;
 
+// TODO: KEY: EXAM => MemberData + InlineData + Mocking
+
 public class BasketViewModelServiceTests
 {
     private readonly Mock<IRepository<Basket>> _basketRepository = new();
@@ -58,16 +60,4 @@ public class BasketViewModelServiceTests
         // Assert
         Assert.Equal(result.BuyerId, userName);
     }
-}
-
-public static class GetBasketData
-{
-    public static IEnumerable<object[]> Data =>
-        new List<object[]>
-        {
-            new object[] { new Basket("Buyer1") },
-            new object[] { new Basket("Buyer2") },
-            new object[] { new Basket("Buyer3") },
-            new object[] { new Basket("Buyer4") },
-        };
 }

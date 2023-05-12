@@ -11,6 +11,9 @@ using Moq;
 using Xunit;
 
 namespace Microsoft.eShopWeb.UnitTests.ApplicationCore.Services.OrderServiceTests;
+
+// TODO: KEY: EXAM => MemberData + Mocking
+
 public class CreateOrder
 {
     private readonly Mock<IRepository<Order>> _mockOrderRepository = new();

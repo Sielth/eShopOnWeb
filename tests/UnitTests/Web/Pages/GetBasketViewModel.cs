@@ -1,11 +1,10 @@
 ﻿using Microsoft.eShopWeb.Web.Pages.Basket;
-using Xunit;
 
 namespace Microsoft.eShopWeb.UnitTests.Web.Pages;
 
-// TODO: KEY: EXAM => MemberData 
+// TODO: KEY: EXAM => MemberData Tests
 
-public class PointsTests
+public static class GetBasketViewModel
 {
     public static IEnumerable<object[]> Data =>
         new List<object[]>
@@ -22,7 +21,7 @@ public class PointsTests
                     Quantity = 10,
                     UnitPrice = 10m
                 }
-            }, 10 },
+            }, 300 },
             new object[] { new List<BasketItemViewModel>
             {
                 new()
@@ -35,7 +34,7 @@ public class PointsTests
                     Quantity = 10,
                     UnitPrice = 40m
                 }
-            }, 40 },            
+            }, 0 },            
             new object[] { new List<BasketItemViewModel>
             {
                 new()
@@ -48,7 +47,7 @@ public class PointsTests
                     Quantity = 1,
                     UnitPrice = 500m
                 }
-            }, 50 },
+            }, 0 },
             new object[] { new List<BasketItemViewModel>
             {
                 new()
@@ -61,26 +60,6 @@ public class PointsTests
                     Quantity = 1,
                     UnitPrice = 50m
                 }
-            }, 0 },
-        }; // TODO: move in another class
-    private BasketViewModel? _basketViewModel;
-    
-    [Theory]
-    [MemberData(nameof(Data))]
-    public void MemberUserGetsPointsDependingOnTotal(List<BasketItemViewModel> basketItemViewModels, int expected)
-    {
-        // Arrange
-        _basketViewModel = new BasketViewModel
-        {
-            Id = 1,
-            BuyerId = "buyer1",
-            Items = basketItemViewModels
+            }, 300 },
         };
-
-        // Act
-        var points = _basketViewModel.AddPoints();
-
-        // Assert
-        Assert.Equal(expected, points);
-    }
 }

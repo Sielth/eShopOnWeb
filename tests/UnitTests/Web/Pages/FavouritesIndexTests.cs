@@ -12,7 +12,9 @@ using Xunit;
 
 namespace Microsoft.eShopWeb.UnitTests.Web.Pages;
 
+// TODO: KEY: EXAM => MemberData Tests
 // GetOrSetBasketCookieAndUserName cannot be tested since it is private
+
 public class FavouritesIndexTests
 {
     private readonly Mock<IFavouriteService> _favouriteServiceMock = new();
@@ -30,13 +32,6 @@ public class FavouritesIndexTests
     private CatalogItem _catalogItem = new CatalogItem(1, 1, "description", "name", 10m, "pictureUri");
 
     private readonly IndexModel _sut;
-
-    public FavouritesIndexTests()
-    {
-        // _sut = new IndexModel(_favouriteServiceMock.Object, _favouriteViewModelService.Object, _itemRepository.Object, _usernameHelper.Object);
-    }
-
-    // --- 
 
     [Fact]
     public async Task OnPost_RedirectsToIndexPage_IfProductIdIsNull()

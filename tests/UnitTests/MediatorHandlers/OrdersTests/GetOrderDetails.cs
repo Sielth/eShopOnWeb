@@ -12,6 +12,8 @@ using Xunit;
 
 namespace Microsoft.eShopWeb.UnitTests.MediatorHandlers.OrdersTests;
 
+// TODO: KEY: EXAM  => ClassData + Mocking
+
 public class GetOrderDetails
 {
     private readonly Mock<IReadRepository<Order>> _mockOrderRepository;
