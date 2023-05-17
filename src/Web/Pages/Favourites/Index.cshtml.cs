@@ -17,11 +17,12 @@ public class IndexModel : PageModel
     private readonly IUsernameHelper _usernameHelper;
     private readonly ILogger<IndexModel> _logger;
     private readonly IFavouriteMapper _favouriteMapper;
-    
+
     public FavouriteViewModel FavouriteModel { get; set; } = new();
 
-    public IndexModel(IFavouriteService favouriteService, IFavouritesViewModelService favouritesViewModelService, IRepository<CatalogItem> itemRepository, IUsernameHelper usernameHelper, ILogger<IndexModel> logger)
+    public IndexModel(IFavouriteMapper favouriteMapper, IFavouriteService favouriteService, IFavouritesViewModelService favouritesViewModelService, IRepository<CatalogItem> itemRepository, IUsernameHelper usernameHelper, ILogger<IndexModel> logger)
     {
+        _favouriteMapper = favouriteMapper;
         _favouriteService = favouriteService;
         _favouritesViewModelService = favouritesViewModelService;
         _itemRepository = itemRepository;
