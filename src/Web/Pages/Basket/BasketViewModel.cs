@@ -16,7 +16,7 @@ public class BasketViewModel
     public decimal CalculateDelivery()
     {
         var itemsTotalPrice = CalculateItemsTotalPrice();
-        return itemsTotalPrice >= 300m ? 0m : 300m;
+        return itemsTotalPrice >= 300m ? 0m : _deliveryFees;
     }
     public decimal CalculateTotal()
     {
