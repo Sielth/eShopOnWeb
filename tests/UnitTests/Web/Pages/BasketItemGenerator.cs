@@ -3,6 +3,8 @@ using Microsoft.eShopWeb.Web.Pages.Basket;
 
 namespace Microsoft.eShopWeb.UnitTests.Web.Pages;
 
+// TODO: KEY: EXAM => TDD Example
+
 public class BasketItemGenerator : IEnumerable<object[]>
 {
     public IEnumerator<object[]> GetEnumerator()
@@ -21,7 +23,7 @@ public class BasketItemGenerator : IEnumerable<object[]>
                     Quantity = 10,
                     UnitPrice = 10m
                 }
-            }, 80
+            }, 380
         };
         yield return new object[]
         {
@@ -69,7 +71,7 @@ public class BasketItemGenerator : IEnumerable<object[]>
                     Quantity = 1,
                     UnitPrice = 50m
                 }
-            }, 40
+            }, 340
         };
     }
 
