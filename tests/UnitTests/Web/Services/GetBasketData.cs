@@ -1,17 +1,22 @@
-﻿using Microsoft.eShopWeb.ApplicationCore.Entities.BasketAggregate;
+﻿using System.Collections;
+using Microsoft.eShopWeb.ApplicationCore.Entities.BasketAggregate;
 
 namespace Microsoft.eShopWeb.UnitTests.Web.Services;
 
-// TODO: KEY: EXAM => MemberData 
+// TODO: KEY: EXAM => ClassData 
 
-public static class GetBasketData
+public class GetBasketData : IEnumerable<object[]>
 {
-    public static IEnumerable<object[]> Data =>
-        new List<object[]>
-        {
-            new object[] { new Basket("Buyer1") },
-            new object[] { new Basket("Buyer2") },
-            new object[] { new Basket("Buyer3") },
-            new object[] { new Basket("Buyer4") },
-        };
+    public IEnumerator<object[]> GetEnumerator()
+    {
+        yield return new object[] { new Basket("Buyer1") };
+        yield return new object[] { new Basket("Buyer2") };
+        yield return new object[] { new Basket("Buyer3") };
+        yield return new object[] { new Basket("Buyer4") };    
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return GetEnumerator();
+    }
 }
