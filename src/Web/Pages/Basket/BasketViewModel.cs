@@ -33,4 +33,13 @@ public class BasketViewModel
 
         return 0;
     }
+    
+    public decimal GetTotalAfterDiscount(decimal points)
+    {
+        decimal total = CalculateItemsTotalPrice();
+        decimal percentDiscount = points / 10;
+        decimal multiplier = (100 - percentDiscount) / 100;
+        decimal priceAfterDiscount = total * multiplier;
+        return priceAfterDiscount + CalculateDelivery();
+    }
 }

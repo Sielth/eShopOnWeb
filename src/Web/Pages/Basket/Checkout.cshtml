@@ -5,7 +5,7 @@
 }
 <section class="esh-catalog-hero">
     <div class="container">
-        <img class="esh-catalog-title" src="~/images/main_banner_text.png" />
+        <img class="esh-catalog-title" src="~/images/main_banner_text.png"/>
     </div>
 </section>
 
@@ -15,7 +15,7 @@
     {
         <form asp-page="Checkout" method="post">
             <article class="esh-basket-titles row">
-                <br />
+                <br/>
                 <section class="esh-basket-title col-xs-3">Product</section>
                 <section class="esh-basket-title col-xs-3 hidden-lg-down"></section>
                 <section class="esh-basket-title col-xs-2">Price</section>
@@ -30,13 +30,13 @@
                     <article class="esh-basket-items row">
                         <div>
                             <section class="esh-basket-item esh-basket-item--middle col-lg-3 hidden-lg-down">
-                                <img class="esh-basket-image" src="@item.PictureUrl" />
+                                <img class="esh-basket-image" src="@item.PictureUrl"/>
                             </section>
                             <section class="esh-basket-item esh-basket-item--middle col-xs-3">@item.ProductName</section>
                             <section class="esh-basket-item esh-basket-item--middle col-xs-2">$ @item.UnitPrice.ToString("N2")</section>
                             <section class="esh-basket-item esh-basket-item--middle col-xs-2">
-                                <input type="hidden" name="@("Items[" + i + "].Id")" value="@item.Id" />
-                                <input type="hidden" name="@("Items[" + i + "].Quantity")" value="@item.Quantity" />
+                                <input type="hidden" name="@("Items[" + i + "].Id")" value="@item.Id"/>
+                                <input type="hidden" name="@("Items[" + i + "].Quantity")" value="@item.Quantity"/>
                                 @item.Quantity
                             </section>
                             <section class="esh-basket-item esh-basket-item--middle esh-basket-item--mark col-xs-2">$ @Math.Round(item.Quantity * item.UnitPrice, 2).ToString("N2")</section>
@@ -69,7 +69,7 @@
                         <a asp-page="Index" class="btn esh-basket-checkout text-white">[ Back ]</a>
                     </section>
                     <section class="esh-basket-item col-xs-push-7 col-xs-4 text-right">
-                        <input type="submit" class="btn esh-basket-checkout" value="[ Pay Now ]" />
+                        <input type="submit" class="btn esh-basket-checkout" value="[ Pay Now ]"/>
                     </section>
                 </div>
             </div>

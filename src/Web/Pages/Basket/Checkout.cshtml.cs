@@ -1,4 +1,6 @@
-﻿using Ardalis.GuardClauses;
+﻿using System.ComponentModel;
+using Ardalis.GuardClauses;
+using AutoMapper.Execution;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -34,30 +36,42 @@ public class CheckoutModel : PageModel
         _logger = logger;
     }
 
-    public BasketViewModel BasketModel { get; set; } = new BasketViewModel();
+    public BasketViewModel BasketModel { get; set; } = new();
+    
+    // TODO: Find a way how to get the ApplicationUser (or MemberUser) 
+    // public ApplicationUser AppUser => GetUser();
 
+    // private ApplicationUser GetUser()
+    // {
+    //     return _signInManager.UserManager.Users.FirstOrDefault(user =>
+    //         User.Identity != null && user.UserName == User.Identity.Name &&
+    //         user.GetType().IsAssignableTo(typeof(MemberUser)));
+    //
+    // }
+    
+    // public decimal GetPoints()
+    // {
+    //     if (User.HasClaim("Member", "True"))
+    //     {
+    //         var user = _signInManager.UserManager.Users.FirstOrDefault(user =>
+    //             User.Identity != null && user.UserName == User.Identity.Name && user.GetType().IsAssignableTo(typeof(MemberUser)));
+    //         if (user is not null) return ((user as MemberUser)!).MemberPoints;
+    //     }
+    //     
+    //     return 0;
+    // }
+    
     public async Task OnGet()
     {
         await SetBasketModelAsync();
     }
-
-    public decimal GetPriceAfterDiscount()
-    {
-        decimal points = ((MemberUser)User.Identity).MemberPoints; // TODO: find how to get applicationUser
-        decimal total = 0; // TODO: Get Total from Basket
-        decimal procentDiscount = points / 10;
-        decimal multiplier = (100 - procentDiscount) / 100;
-        decimal priceAfterDiscount = total * multiplier;
-        return priceAfterDiscount;
-    }
-
+    
     public async Task<IActionResult> OnPost(IEnumerable<BasketItemViewModel> items)
     {
         try
         {
             await SetBasketModelAsync();
-            if (User is MemberUser) GetPriceAfterDiscount(); //TODO: How to change total
-
+            
             if (!ModelState.IsValid)
             {
                 return BadRequest();

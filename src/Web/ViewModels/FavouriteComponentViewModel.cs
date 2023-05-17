@@ -2,8 +2,5 @@
 
 public class FavouriteComponentViewModel
 {
-    //public int ItemsCount { get; set; }
-
-
-    public int FavourieItemCount { get; set; }
+    public int? FavourieItemCount { get; set; }
 }
