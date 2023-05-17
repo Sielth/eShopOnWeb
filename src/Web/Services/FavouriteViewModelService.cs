@@ -24,7 +24,7 @@ public class FavouriteViewModelService : IFavouritesViewModelService
 
     public async Task<FavouriteViewModel> GetOrCreateFavouriteForUser(string username)
     {
-        var favouriteSpec = new FavouriteWithItemsSpecification(username);
+        var favouriteSpec = new FavouriteItemsSpecification(username);
         _logger.LogInformation(favouriteSpec.ToString());
         var favourite = await _favouriteRepository.FirstOrDefaultAsync(favouriteSpec);
 
