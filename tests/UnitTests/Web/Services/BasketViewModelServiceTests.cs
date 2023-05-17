@@ -8,7 +8,7 @@ using Xunit;
 
 namespace Microsoft.eShopWeb.UnitTests.Web.Services;
 
-// TODO: KEY: EXAM => MemberData + InlineData + Mocking
+// TODO: KEY: EXAM => ClassData + InlineData + Mocking
 
 public class BasketViewModelServiceTests
 {
@@ -28,7 +28,7 @@ public class BasketViewModelServiceTests
     }
 
     [Theory]
-    [MemberData(nameof(GetBasketData.Data), MemberType= typeof(GetBasketData))]
+    [ClassData(typeof(GetBasketData))]
     public async void GetBasketForUser(Basket basket)
     {
         // Arrange
