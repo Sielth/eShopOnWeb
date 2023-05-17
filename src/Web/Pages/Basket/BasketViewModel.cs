@@ -1,10 +1,12 @@
 ﻿namespace Microsoft.eShopWeb.Web.Pages.Basket;
 
 public class BasketViewModel
-{
+{   
     public int Id { get; set; }
     public List<BasketItemViewModel> Items { get; set; } = new();
     public string? BuyerId { get; set; }
+
+    public decimal _deliveryFees = 300m;
 
     public decimal CalculateItemsTotalPrice()
     {
@@ -14,7 +16,7 @@ public class BasketViewModel
     public decimal CalculateDelivery()
     {
         var itemsTotalPrice = CalculateItemsTotalPrice();
-        return itemsTotalPrice >= 300 ? 0m : 300m;
+        return itemsTotalPrice >= 300m ? 0m : 300m;
     }
     public decimal CalculateTotal()
     {
