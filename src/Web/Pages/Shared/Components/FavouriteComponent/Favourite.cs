@@ -17,8 +17,16 @@ public class Favourite : ViewComponent
 {
     private readonly IFavouritesViewModelService _favouriteService;
     private readonly SignInManager<ApplicationUser> _signInManager;
-    private readonly IFavouritItemseHelper _favouritItemseHelper;
+    private readonly IFavouritItemseHelper _favouriteItemseHelper;
 
+    public Favourite(IFavouritesViewModelService basketService,
+                    SignInManager<ApplicationUser> signInManager, IFavouritItemseHelper favouriteItemseHelper)
+    {
+        _favouriteService = basketService;
+        _signInManager = signInManager;
+        _favouriteItemseHelper = favouriteItemseHelper;
+    }
+    
     public async Task<IViewComponentResult> InvokeAsync()
     {
         var vm = new FavouriteComponentViewModel
@@ -28,26 +36,20 @@ public class Favourite : ViewComponent
         return View(vm);
     }
 
-    public Favourite(IFavouritesViewModelService basketService,
-                    SignInManager<ApplicationUser> signInManager)
-    {
-        _favouriteService = basketService;
-        _signInManager = signInManager;
-    }
   
-    private async Task<int> CountTotalFavouriteItems()
+    private async Task<int>? CountTotalFavouriteItems()
     {
         if (_signInManager.IsSignedIn(HttpContext.User))
         {
             Guard.Against.Null(User?.Identity?.Name, nameof(User.Identity.Name));
-            return await _favouritItemseHelper.CountTotalFavouriteItems(User.Identity.Name);
+            return await _favouriteItemseHelper.CountTotalFavouriteItems(User.Identity.Name);
         }
 
         string? anonymousId = GetAnnonymousIdFromCookie();
         if (anonymousId == null)
             return 0;
 
-        return await _favouritItemseHelper.CountTotalFavouriteItems(anonymousId);
+        return await _favouriteItemseHelper.CountTotalFavouriteItems(anonymousId);
     }
     private string? GetAnnonymousIdFromCookie()
     {

@@ -1,15 +1,15 @@
-﻿using Microsoft.eShopWeb.Web.Pages.Basket;
+﻿using System.Collections;
+using Microsoft.eShopWeb.Web.Pages.Basket;
 
 namespace Microsoft.eShopWeb.UnitTests.Web.Pages;
 
-// TODO: KEY: EXAM => MemberData
-
-public static class GetBasketViewModel
+public class BasketItemGenerator : IEnumerable<object[]>
 {
-    public static IEnumerable<object[]> Data =>
-        new List<object[]>
+    public IEnumerator<object[]> GetEnumerator()
+    {
+        yield return new object[]
         {
-            new object[] { new List<BasketItemViewModel>
+            new List<BasketItemViewModel>
             {
                 new()
                 {
@@ -21,8 +21,11 @@ public static class GetBasketViewModel
                     Quantity = 10,
                     UnitPrice = 10m
                 }
-            }, 300 },
-            new object[] { new List<BasketItemViewModel>
+            }, 80
+        };
+        yield return new object[]
+        {
+            new List<BasketItemViewModel>
             {
                 new()
                 {
@@ -34,8 +37,11 @@ public static class GetBasketViewModel
                     Quantity = 10,
                     UnitPrice = 40m
                 }
-            }, 0 },            
-            new object[] { new List<BasketItemViewModel>
+            }, 320
+        };
+        yield return new object[]
+        {
+            new List<BasketItemViewModel>
             {
                 new()
                 {
@@ -47,8 +53,11 @@ public static class GetBasketViewModel
                     Quantity = 1,
                     UnitPrice = 500m
                 }
-            }, 0 },
-            new object[] { new List<BasketItemViewModel>
+            }, 400
+        };
+        yield return new object[]
+        {
+            new List<BasketItemViewModel>
             {
                 new()
                 {
@@ -60,6 +69,12 @@ public static class GetBasketViewModel
                     Quantity = 1,
                     UnitPrice = 50m
                 }
-            }, 300 },
+            }, 40
         };
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return GetEnumerator();
+    }
 }

@@ -62,7 +62,8 @@ public class PointsTests
                     UnitPrice = 50m
                 }
             }, 0 },
-        }; // TODO: move in another class
+        };
+    
     private BasketViewModel? _basketViewModel;
     
     [Theory]
