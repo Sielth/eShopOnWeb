@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.eShopWeb.ApplicationCore.Entities;
 using Microsoft.eShopWeb.ApplicationCore.Interfaces;
 using Microsoft.eShopWeb.Web.Interfaces;
+using Microsoft.eShopWeb.Web.Mapping.Favourites;
 using Microsoft.eShopWeb.Web.Pages.Favourites;
 using Microsoft.eShopWeb.Web.Pages.Shared.Username;
 using Microsoft.eShopWeb.Web.ViewModels;
@@ -22,6 +23,7 @@ public class FavouritesIndexTests
     private readonly Mock<IRepository<CatalogItem>> _itemRepository = new();
     private readonly Mock<IUsernameHelper> _usernameHelper = new();
     private readonly Mock<ILogger<IndexModel>> _logger = new();
+    private readonly Mock<IFavouriteMapper> _favouriteMapper = new();
 
     private CatalogItemViewModel? _catalogItemViewModel =
         new() { Id = 1, Name = "name", Price = 10m, PictureUri = "pictureUri" };
@@ -32,6 +34,12 @@ public class FavouritesIndexTests
     private CatalogItem _catalogItem = new CatalogItem(1, 1, "description", "name", 10m, "pictureUri");
 
     private readonly IndexModel _sut;
+
+    public FavouritesIndexTests()
+    {
+        _sut = new IndexModel(_favouriteServiceMock.Object, _favouriteViewModelService.Object,
+            _itemRepository.Object, _usernameHelper.Object, _logger.Object, _favouriteMapper.Object);
+    }
 
     [Fact]
     public async Task OnPost_RedirectsToIndexPage_IfProductIdIsNull()

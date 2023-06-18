@@ -30,8 +30,8 @@ public class BasketViewModelTests
     }
 
     [Theory]
-    [MemberData(nameof(GetBasketViewModel.Data), MemberType= typeof(GetBasketViewModel))]
-    public void MemberUserGetsPointsDependingOnTotal(List<BasketItemViewModel> basketItemViewModels)
+    [MemberData(nameof(GetBasketViewModel.PointsData), MemberType= typeof(GetBasketViewModel))]
+    public void MemberUserGetsPointsDependingOnTotal(List<BasketItemViewModel> basketItemViewModels, int expected)
     {
         // Arrange
         _basketViewModel = new BasketViewModel
@@ -41,7 +41,7 @@ public class BasketViewModelTests
             Items = basketItemViewModels
         };
 
-        var expected = 105;
+        var expectedPoints = 105;
         var totalWithoutDelivery = _basketViewModel.CalculateItemsTotalPrice();
 
         // Act
