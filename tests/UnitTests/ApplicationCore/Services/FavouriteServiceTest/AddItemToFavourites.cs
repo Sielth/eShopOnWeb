@@ -9,6 +9,7 @@ using Xunit;
 namespace Microsoft.eShopWeb.UnitTests.ApplicationCore.Services.FavouriteServiceTest;
 
 // TODO: KEY: EXAM => First Test using TDD
+
 public class AddItemToFavourites
 {
     private readonly string _buyerId = "Test buyerId";
