@@ -17,16 +17,23 @@ public class AddItemToFavourites
     [Fact]
     public async Task InvokesFavouriteRepositoryGetBySpecAsyncOnce()
     {
+        // Arrange
         var favourite = new Favourite(_buyerId);
+        var sut = new FavouriteService(_mockFavouriteRepo.Object);
 
-        _mockFavouriteRepo.Setup(x => x.FirstOrDefaultAsync(It.IsAny<FavouriteItemsSpecification>(), 
+        _mockFavouriteRepo.Setup(x => x.FirstOrDefaultAsync(It.IsAny<FavouriteItemsSpecification>(),
                 default))
             .ReturnsAsync(favourite);
 
-        var favouriteService = new FavouriteService(_mockFavouriteRepo.Object);
-        await favouriteService.AddToFavourites(favourite.BuyerId, 1, 50m);
+        // Acr
+        await sut.AddToFavourites(favourite.BuyerId, 1, 50m);
 
-        _mockFavouriteRepo.Verify(x => x.FirstOrDefaultAsync(It.IsAny<FavouriteItemsSpecification>(), 
+        // Assert
+        _mockFavouriteRepo.Verify(x => x.FirstOrDefaultAsync(It.IsAny<FavouriteItemsSpecification>(),
+                default),
+            Times.Once);
+        
+        _mockFavouriteRepo.Verify(x => x.UpdateAsync(It.IsAny<Favourite>(),
                 default),
             Times.Once);
     }
